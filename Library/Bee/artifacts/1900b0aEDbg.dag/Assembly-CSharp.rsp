@@ -340,13 +340,15 @@
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/UnityEngine.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/VSSettingsProvider.ref.dll"
-"Assets/Scripts/Battlefield.cs"
-"Assets/Scripts/Dungeon.cs"
-"Assets/Scripts/Explorer.cs"
-"Assets/Scripts/InitBattlefield.cs"
-"Assets/Scripts/InitDungeon.cs"
-"Assets/Scripts/Rng.cs"
-"Assets/Scripts/Scene.cs"
+"Assets/Scripts/Battlefield/Army.cs"
+"Assets/Scripts/Battlefield/Battle.cs"
+"Assets/Scripts/Battlefield/Battlefield.cs"
+"Assets/Scripts/Battlefield/Champion.cs"
+"Assets/Scripts/Dungeon/Dungeon.cs"
+"Assets/Scripts/Dungeon/Explorer.cs"
+"Assets/Scripts/Encounter/Encounter.cs"
+"Assets/Scripts/Services/Cam.cs"
+"Assets/Scripts/Services/Rng.cs"
 -langversion:8.0
 
 /deterministic
