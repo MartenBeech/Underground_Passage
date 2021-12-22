@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class Army : MonoBehaviour
 {
-    List<Champion> champions = new List<Champion>();
+    private static List<Champion> champions = new List<Champion>();
 
-    public void RecruitChampion(Champion champion)
+    public void AddChampionToArmy(Champion champion)
     {
         champions.Add(champion);
     }

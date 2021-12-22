@@ -6,54 +6,46 @@ using UnityEngine.UI;
 
 public class Encounter : MonoBehaviour
 {
+    public static GameObject[] options = new GameObject[2];
     private void Start()
     {
         CreateEncounter();
     }
     private void CreateEncounter()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 2; i++)
         {
             
             GameObject prefab = Resources.Load<GameObject>("Assets/EncounterButton");
             GameObject parent = GameObject.Find("OptionButtons");
             Vector3 canvasOffset = GameObject.Find("CanvasEncounter").GetComponent<Transform>().position;
 
-            Vector3 pos = new Vector3(canvasOffset.x - 5, canvasOffset.y + (-i * 5) + 5);
+            Vector3 pos = new Vector3(canvasOffset.x - 10, canvasOffset.y + (-i * 8) + 3);
             GameObject optionBtn = Instantiate(prefab, pos, new Quaternion(0, 0, 0, 0), parent.transform);
             optionBtn.name = $"OptionButton{i}";
-            optionBtn.GetComponent<Button>().onClick.AddListener(() => ClickOption(optionBtn.name));
+            options[i] = optionBtn;
+            optionBtn.GetComponent<Button>().onClick.AddListener(() => ClickOption(i));
         }
     }
 
-    public void StartEncounter(Dungeon.EncounterType encounterType)
+    public void SetupEncounter(Dungeon.EncounterType encounterType)
     {
-        Cam cam = new Cam();
-        switch (encounterType)
+        switch(encounterType)
         {
-            case Dungeon.EncounterType.EnemyNormal:
-                cam.Battlefield();
-                break;
-
-            case Dungeon.EncounterType.EnemyElite:
-                cam.Battlefield();
-                break;
-
-            case Dungeon.EncounterType.Random:
-                cam.Encounter();
-                break;
-
             case Dungeon.EncounterType.Bonfire:
-                cam.Encounter();
+                break;
+
+            case Dungeon.EncounterType.Recruit:
+                Recruit recruit = new Recruit();
+                recruit.SetupRecruit();
                 break;
 
             case Dungeon.EncounterType.Treasure:
-                cam.Encounter();
                 break;
         }
     }
 
-    public void ClickOption(string name)
+    public void ClickOption(int i)
     {
 
     }

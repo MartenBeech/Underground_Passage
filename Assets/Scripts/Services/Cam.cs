@@ -6,14 +6,10 @@ using UnityEngine.UI;
 
 public class Cam : MonoBehaviour
 {
-    private void Start()
-    {
-        Dungeon();
-    }
     public void Dungeon()
     {
         GameObject cam = GameObject.Find("Main Camera");
-        Vector3 canvasPos = GameObject.Find("CanvasDungeon").transform.position;
+        Vector3 canvasPos = GameObject.Find("Explorer").transform.position;
         cam.transform.position = new Vector3(canvasPos.x, canvasPos.y, -10);
     }
 

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Dungeon : MonoBehaviour
 {
-    public enum EncounterType { NA, EnemyNormal, Random, EnemyElite, Bonfire, Treasure, Recruit}
+    public enum EncounterType { NA, Enemy, Boss, Bonfire, Treasure, Recruit}
     public void Start()
     {
         CreateDungeon();
@@ -17,85 +17,72 @@ public class Dungeon : MonoBehaviour
         GameObject prefab = Resources.Load<GameObject>("Assets/MapTile");
         GameObject parent = GameObject.Find("MapTiles");
         
-        for (int y = 0; y < 21; y++)
+        for (int i = 1; i < 10; i++)
         {
-            if (y == 0)
+            Vector3 pos = new Vector3(0, i * 2);
+            GameObject mapTile = Instantiate(prefab, pos, new Quaternion(0, 0, 0, 0), parent.transform);
+            mapTile.name = $"MapTile{i}";
+            EncounterType encounterType = EncounterType.NA;
+            switch(i)
             {
-                int x = 3;
-                Vector3 pos = new Vector3(x, y * 2);
-                GameObject mapTile = Instantiate(prefab, pos, new Quaternion(0, 0, 0, 0), parent.transform);
-                mapTile.name = $"MapTile{x},{y}";
-                EncounterType encounterType = EncounterType.NA;
-                encounterType = SetTile(mapTile, 6);
-                mapTile.GetComponent<Button>().onClick.AddListener(() => ClickTile(mapTile.name, encounterType));
+                case 1:
+                    encounterType = EncounterType.Recruit;
+                    break;
+                case 3:
+                    encounterType = EncounterType.Bonfire;
+                    break;
+                case 5:
+                    encounterType = EncounterType.Treasure;
+                    break;
+                case 7:
+                    encounterType = EncounterType.Bonfire;
+                    break;
+                case 8:
+                    encounterType = EncounterType.Boss;
+                    break;
+
+                default:
+                    encounterType = EncounterType.Enemy;
+                    break;
             }
-            else
-            {
-                for (int x = 0; x < 4; x++)
-                {
-                    Vector3 pos = new Vector3(x * 2, y * 2);
-                    GameObject mapTile = Instantiate(prefab, pos, new Quaternion(0, 0, 0, 0), parent.transform);
-                    mapTile.name = $"MapTile{x},{y}";
-                    EncounterType encounterType = EncounterType.NA;
-                    if (y == 10)
-                    {
-                        encounterType = SetTile(mapTile, 5);
-                    }
-                    else if (y % 2 == 0)
-                    {
-                        encounterType = SetTile(mapTile, 0);
-                    }
-                    else
-                    {
-                        encounterType = SetTile(mapTile);
-                    }
-                    mapTile.GetComponent<Button>().onClick.AddListener(() => ClickTile(mapTile.name, encounterType));
-                }
-            }
+
+            mapTile.GetComponent<Image>().sprite = Resources.Load<Sprite>($"MapIcons/{encounterType}");
+            int index = i;
+            mapTile.GetComponent<Button>().onClick.AddListener(() => ClickTile(index, encounterType));
         }
     }
 
-    public EncounterType SetTile(GameObject tile, int setNumber = -1)
+    public void ClickTile(int i, EncounterType encounterType)
     {
-        Rng rng = new Rng();
-        int number = setNumber == -1 ? rng.Range(1, 5) : setNumber;
-        
-        if (number == 0)
+        if (i == Explorer.position + 1)
         {
-            tile.GetComponent<Image>().sprite = Resources.Load<Sprite>("MapIcons/EnemyNormal");
-            return EncounterType.EnemyNormal;
-        }
-        if (number == 1 || number == 2)
-        {
-            tile.GetComponent<Image>().sprite = Resources.Load<Sprite>("MapIcons/Random");
-            return EncounterType.Random;
-        }
-        if (number == 3)
-        {
-            tile.GetComponent<Image>().sprite = Resources.Load<Sprite>("MapIcons/EnemyElite");
-            return EncounterType.EnemyElite;
-        }
-        if (number == 4)
-        {
-            tile.GetComponent<Image>().sprite = Resources.Load<Sprite>("MapIcons/Bonfire");
-            return EncounterType.Bonfire;
-        }
-        if (number == 5)
-        {
-            tile.GetComponent<Image>().sprite = Resources.Load<Sprite>("MapIcons/Treasure");
-            return EncounterType.Treasure;
-        }
-        if (number == 6)
-        {
-            tile.GetComponent<Image>().sprite = Resources.Load<Sprite>("MapIcons/Recruit");
-            return EncounterType.Recruit;
-        }
-        return EncounterType.NA;
-    }
+            Cam cam = new Cam();
+            Encounter encounter = new Encounter();
+            switch (encounterType)
+            {
+                case EncounterType.Enemy:
+                    cam.Battlefield();
+                    break;
 
-    public void ClickTile(string name, EncounterType encounterType)
-    {
-        Encounter encounter = new Encounter();
-        encounter.StartEncounter(encounterType);
+                case EncounterType.Boss:
+                    cam.Battlefield();
+                    break;
+
+                case EncounterType.Recruit:
+                    cam.Encounter();
+                    encounter.SetupEncounter(encounterType);
+                    break;
+
+                case EncounterType.Bonfire:
+                    cam.Encounter();
+                    encounter.SetupEncounter(encounterType);
+                    break;
+
+                case EncounterType.Treasure:
+                    cam.Encounter();
+                    encounter.SetupEncounter(encounterType);
+                    break;
+            }
+        }
     }
 }

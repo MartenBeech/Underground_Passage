@@ -346,7 +346,10 @@
 "Assets/Scripts/Battlefield/Champion.cs"
 "Assets/Scripts/Dungeon/Dungeon.cs"
 "Assets/Scripts/Dungeon/Explorer.cs"
+"Assets/Scripts/Encounter/Bonfire.cs"
 "Assets/Scripts/Encounter/Encounter.cs"
+"Assets/Scripts/Encounter/Recruit.cs"
+"Assets/Scripts/Encounter/Treasure.cs"
 "Assets/Scripts/Services/Cam.cs"
 "Assets/Scripts/Services/Rng.cs"
 -langversion:8.0
