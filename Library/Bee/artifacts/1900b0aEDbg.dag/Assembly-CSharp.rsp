@@ -344,6 +344,7 @@
 "Assets/Scripts/Battlefield/Battle.cs"
 "Assets/Scripts/Battlefield/Battlefield.cs"
 "Assets/Scripts/Battlefield/Champion.cs"
+"Assets/Scripts/Battlefield/ChampionStats.cs"
 "Assets/Scripts/Dungeon/Dungeon.cs"
 "Assets/Scripts/Dungeon/Explorer.cs"
 "Assets/Scripts/Encounter/Bonfire.cs"

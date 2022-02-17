@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Army : MonoBehaviour
 {
-    private static List<Champion> champions = new List<Champion>();
+    public static List<Champion> champions = new List<Champion>();
 
     public void AddChampionToArmy(Champion champion)
     {

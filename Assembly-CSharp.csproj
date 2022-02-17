@@ -53,8 +53,10 @@
     <UnityVersion>2021.1.21f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Encounter\Bonfire.cs" />
     <Compile Include="Assets\Scripts\Dungeon\Explorer.cs" />
     <Compile Include="Assets\Scripts\Encounter\Encounter.cs" />
+    <Compile Include="Assets\Scripts\Encounter\Recruit.cs" />
     <Compile Include="Assets\Scripts\Battlefield\Battlefield.cs" />
     <Compile Include="Assets\Scripts\Services\Rng.cs" />
     <Compile Include="Assets\Scripts\Battlefield\Army.cs" />
@@ -62,9 +64,8 @@
     <Compile Include="Assets\Scripts\Dungeon\Dungeon.cs" />
     <Compile Include="Assets\Scripts\Services\Cam.cs" />
     <Compile Include="Assets\Scripts\Battlefield\Champion.cs" />
-    <Compile Include="Assets\Scripts\Encounter\Bonfire.cs" />
     <Compile Include="Assets\Scripts\Encounter\Treasure.cs" />
-    <Compile Include="Assets\Scripts\Encounter\Recruit.cs" />
+    <Compile Include="Assets\Scripts\Battlefield\ChampionStats.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Encounter : MonoBehaviour
 {
     public static GameObject[] options = new GameObject[2];
+    public static string[] optionTitles = new string[2];
     private void Start()
     {
         CreateEncounter();
@@ -24,7 +25,6 @@ public class Encounter : MonoBehaviour
             GameObject optionBtn = Instantiate(prefab, pos, new Quaternion(0, 0, 0, 0), parent.transform);
             optionBtn.name = $"OptionButton{i}";
             options[i] = optionBtn;
-            optionBtn.GetComponent<Button>().onClick.AddListener(() => ClickOption(i));
         }
     }
 
@@ -43,10 +43,5 @@ public class Encounter : MonoBehaviour
             case Dungeon.EncounterType.Treasure:
                 break;
         }
-    }
-
-    public void ClickOption(int i)
-    {
-
     }
 }
